@@ -1,49 +1,53 @@
 # inherit from the proprietary version
--include vendor/meizu/arale/BoardConfigVendor.mk
+-include vendor/xiaomi/hermes/BoardConfigVendor.mk
 
-DEVICE_FOLDER_COMMON := device/meizu/arale
+LOCAL_PATH := device/xiaomi/hermes
+
+DEVICE_FOLDER_COMMON := device/xiaomi/hermes
 
 # Platform
-TARGET_BOARD_PLATFORM := mt6595
+ARCH_ARM_HAVE_TLS_REGISTER := true
+TARGET_BOARD_PLATFORM := mt6795
 TARGET_NO_BOOTLOADER := true
+TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_NO_FACTORYIMAGE := true
 
 TARGET_LDPRELOAD += libxlog.so:libmtkabi.so
 
 # Architecture
-TARGET_ARCH := arm
-TARGET_ARCH_VARIANT := armv7-a-neon
-TARGET_CPU_ABI := armeabi-v7a
-TARGET_CPU_ABI2 := armeabi
+TARGET_ARCH := arm64
+TARGET_ARCH_VARIANT := armv8-a
+TARGET_CPU_ABI := arm64-v8a
+TARGET_CPU_ABI2 := 
+TARGET_CPU_VARIANT := generic
 TARGET_CPU_SMP := true
-TARGET_CPU_VARIANT := cortex-a7
-ARCH_ARM_HAVE_NEON := true
-ARCH_ARM_HAVE_VFP := true
-ARCH_ARM_HAVE_TLS_REGISTER := true
+
+TARGET_2ND_ARCH := arm
+TARGET_2ND_ARCH_VARIANT := armv7-a-neon
+TARGET_2ND_CPU_ABI := armeabi-v7a
+TARGET_2ND_CPU_ABI2 := armeabi
+TARGET_2ND_CPU_VARIANT := cortex-a53
+TARGET_BOARD_SUFFIX := _64
+TARGET_USES_64_BIT_BINDER := true
+
+TARGET_CPU_CORTEX_A53 := true
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := mt6595
+TARGET_BOOTLOADER_BOARD_NAME := mt6795
 
 TARGET_USERIMAGES_USE_EXT4:=true
 TARGET_USERIMAGES_SPARSE_EXT_DISABLED := false
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 
 # Kernel
-BOARD_KERNEL_CMDLINE :=
-BOARD_KERNEL_BASE := 0x40000000
+TARGET_USES_64_BIT_BINDER := true
+TARGET_IS_64_BIT := true
+BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 androidboot.selinux=permissive
+BOARD_KERNEL_BASE := 0x40078000
 BOARD_KERNEL_PAGESIZE := 2048
-BOARD_MKBOOTIMG_ARGS := \
-	--base 0x40000000 \
-	--pagesize 2048 \
-	--kernel_offset 0x00008000 \
-	--ramdisk_offset 0x04000000 \
-	--second_offset 0x00f00000 \
-	--tags_offset 0x0e000000 \
-	--board 32
-
-TARGET_PREBUILT_KERNEL := $(DEVICE_FOLDER_COMMON)/prebuilt/kernel
-#BOARD_CUSTOM_BOOTIMG_MK := $(DEVICE_FOLDER_COMMON)/boot.mk
-#BOARD_MKBOOTIMG_ARGS := --board 1419997733
-#BOARD_CUSTOM_BOOTIMG := true
+BOARD_MKBOOTIMG_ARGS := --base 0x40078000 --pagesize 2048 --kernel_offset 0x00008000 --ramdisk_offset 0x03f88000 --second_offset 0x00e88000 --tags_offset 0x0df88000 --board Bule
+TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/prebuilt/kernel
+BOARD_CUSTOM_BOOTIMG := true
 
 TARGET_KMODULES := true
 
@@ -54,12 +58,11 @@ TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 TARGET_CPU_MEMCPY_OPT_DISABLE := true
 
 # EGL
-BOARD_EGL_CFG := $(DEVICE_FOLDER_COMMON)/configs/egl.cfg
 USE_OPENGL_RENDERER := true
-BOARD_EGL_WORKAROUND_BUG_10194508 := true
-
+BOARD_EGL_CFG := $(LOCAL_PATH)/configs/egl.cfg
 TARGET_SCREEN_HEIGHT := 1920
-TARGET_SCREEN_WIDTH := 1152
+TARGET_SCREEN_WIDTH := 1080
+BOARD_EGL_WORKAROUND_BUG_10194508 := true
 
 # MTK Hardware
 BOARD_HAS_MTK_HARDWARE := true
@@ -70,10 +73,6 @@ COMMON_GLOBAL_CPPFLAGS += -DMTK_HARDWARE
 
 BOARD_HAVE_OPENSOURCE_IMMVIBE := true
 BOARD_HARDWARE_CLASS := $(DEVICE_FOLDER_COMMON)/cmhw
-
-# Audio
-# source-compiled TFA9890 support
-NXP_SMARTPA_SUPPORT := tfa9890
 
 # RIL
 # moved to forked frameworks_opt_telephony repo
@@ -171,38 +170,46 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_FOLDER_COMMON)/bluetooth
 # system.prop
 TARGET_SYSTEM_PROP := $(DEVICE_FOLDER_COMMON)/system.prop
 
-# CWM
-TARGET_RECOVERY_FSTAB := $(DEVICE_FOLDER_COMMON)/root/recovery.fstab
+# RECOVERY
 BOARD_HAS_NO_SELECT_BUTTON := true
+BOARD_RECOVERY_SWIPE := true
+BOARD_SUPPRESS_EMMC_WIPE := true
+BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
+TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/recovery.fstab
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBA_8888"
-BOARD_USE_FRAMEBUFFER_ALPHA_CHANNEL := true
-TARGET_DISABLE_TRIPLE_BUFFERING := false
-#BOARD_CUSTOM_GRAPHICS := $(DEVICE_FOLDER)/recovery/graphics.cwmt.c
-RECOVERY_FONT := roboto_15x24.h
+TARGET_USERIMAGES_USE_EXT4 := true
 
-# TWRP
-# disabled due to graphics problem... can't open fb
-#RECOVERY_VARIANT=twrp
-#DEVICE_RESOLUTION := 1152x1920
-DEVICE_RESOLUTION := 1080x1920
-TW_NO_USB_STORAGE := true
-RECOVERY_GRAPHICS_USE_LINELENGTH := true
-TW_NO_REBOOT_BOOTLOADER := true
-TW_BRIGHTNESS_PATH := /sys/devices/platform/leds-mt65xx/leds/lcd-backlight/brightness
-TW_MAX_BRIGHTNESS := 255
-TW_CUSTOM_CPU_TEMP_PATH := /sys/devices/virtual/thermal/thermal_zone1/temp
-#BOARD_CUSTOM_GRAPHICS := \
-#	../../../$(DEVICE_FOLDER)/recovery/graphics.c \
-#	../../../$(DEVICE_FOLDER)/recovery/graphics_adf.c \
-#	../../../$(DEVICE_FOLDER)/recovery/graphics_fbdev.c
-#TW_BOARD_CUSTOM_GRAPHICS := ../../../$(DEVICE_FOLDER)/recovery/graphics.twrp.c
-#TW_INTERNAL_STORAGE_PATH := "/emmc"
-#TW_INTERNAL_STORAGE_MOUNT_POINT := "emmc"
-#TW_EXTERNAL_STORAGE_PATH := "/sdcard"
-#TW_EXTERNAL_STORAGE_MOUNT_POINT := "sdcard"
+# Flags
+TARGET_GLOBAL_CFLAGS   += -mfpu=neon -mfloat-abi=softfp
+TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
+COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
+COMMON_GLOBAL_CFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
+TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 
-TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/virtual/android_usb/android0/f_mass_storage/lun%d/file"
+# LightHAL
+TARGET_PROVIDES_LIBLIGHT := true
 
+# Enable Minikin text layout engine (will be the default soon)
+USE_MINIKIN := true
+
+# Charger
+BOARD_CHARGER_SHOW_PERCENTAGE := true
+
+# GPS
+BOARD_GPS_LIBRARIES :=true
+BOARD_CONNECTIVITY_MODULE := MT6630 
+BOARD_MEDIATEK_USES_GPS := true
+
+# FM
+MTK_FM_SUPPORT :=true
+MTK_FM_RX_SUPPORT :=true
+
+# Consumerir
+MTK_IRTX_SUPPORT :=true
+
+# MKImage
+TARGET_MKIMAGE := $(LOCAL_PATH)/mkimage
+TARGET_USE_BUILT_BOOTIMAGE := true
 
 # SELinux
 BOARD_SEPOLICY_DIRS += \
