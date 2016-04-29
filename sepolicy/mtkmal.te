@@ -51,16 +51,13 @@ allow mtkmal system_file:file execute_no_trans;
 
 allow mtkmal shell_exec:file { read execute open execute_no_trans };
 
+
 # ePDGa
 allow mtkmal devpts:chr_file setattr;
 allow mtkmal epdg_wod:unix_stream_socket connectto;
 allow mtkmal wod_sim_socket:sock_file write;
 allow mtkmal wod_action_socket:sock_file write;
 allow mtkmal self:udp_socket { create ioctl };
-allow mtkmal device:dir write;
-allow mtkmal device:dir add_name;
-allow mtkmal self:netlink_route_socket { write nlmsg_write read bind create nlmsg_read };
-allow mtkmal device:lnk_file create;
 
 #for RAN access wpa
 unix_socket_send(mtkmal, wpa, wpa)

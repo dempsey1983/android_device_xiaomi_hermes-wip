@@ -86,3 +86,6 @@ allow mobile_log_d storage_file:file create_file_perms;
 allow mobile_log_d storage_file:lnk_file create_file_perms;
 allow mobile_log_d mnt_user_file:dir create_dir_perms;
 allow mobile_log_d mnt_user_file:lnk_file create_file_perms;
+#chiptest mode storage access
+allow mobile_log_d mnt_media_rw_file:dir create_dir_perms;
+allow mobile_log_d mnt_media_rw_file:lnk_file create_file_perms;

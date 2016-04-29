@@ -45,16 +45,12 @@ type smartpa1_device, dev_type;
 type uio0_device, dev_type;
 type xt_qtaguid_device, dev_type;
 type rfkill_device, dev_type;
-type sw_sync_device, dev_type;
+type sw_sync_device, dev_type, mlstrustedobject;
 type sec_device, dev_type;
 type hid_keyboard_device, dev_type;
 type btn_device, dev_type;
 type uinput_device, dev_type;
 type TV_out_device, dev_type;
-# Vanzo:yinjun on: Mon, 13 Apr 2015 16:38:07 +0800
-# add remoteir
-type remote_ctrl_dev_device, dev_type;
-# End of Vanzo: yinjun
 type camera_sysram_device, dev_type;
 type camera_isp_device, dev_type;
 type camera_fdvt_device, dev_type;

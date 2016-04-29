@@ -39,3 +39,6 @@ allow healthd app_data_file:file write;
 allow healthd device:dir {open read write};
 allow kpoc_charger self:capability sys_boot;
 allow kpoc_charger alarm_device:chr_file write;
+allow kpoc_charger logo_device:chr_file { open read };
+allow kpoc_charger mmcblk0_block_device:blk_file read;
+allow kpoc_charger mmcblk0_block_device:blk_file open;

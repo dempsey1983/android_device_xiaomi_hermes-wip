@@ -106,6 +106,8 @@ allow factory nvram_data_file:file { create_file_perms };
 allow factory nvram_data_file:lnk_file read;
 allow factory nvdata_file:dir { create_dir_perms };
 allow factory nvdata_file:file { create_file_perms };
+allow factory cct_data_file:dir { create_dir_perms };
+allow factory cct_data_file:file { create_file_perms };
 allow factory self:capability { sys_nice sys_time };
 allow factory system_data_file:dir { write add_name };
 allow factory rootfs:dir mounton;
