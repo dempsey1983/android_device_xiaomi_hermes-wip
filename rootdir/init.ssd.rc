@@ -8,7 +8,7 @@ on post-fs-data
 # we will remap this as /mnt/sdcard with the sdcard fuse tool
 		mkdir /data/media 0770 media_rw media_rw
 		chown media_rw media_rw /data/media
-
+		
 #
 # SHARED_SDCARD related directory & configuration (end)
 #
@@ -27,20 +27,18 @@ on init
     #mkdir /storage/sdcard1 0700 root root
 
     export EXTERNAL_STORAGE /storage/self/primary
-
+    
     # Support legacy paths
     symlink /storage/self/primary /storage/emulated/legacy
     symlink /storage/emulated/legacy /mnt/sdcard
     symlink /storage/emulated/legacy /storage/sdcard0
 
-
 on post-fs
     # mount shared so changes propagate into child namespaces
     mount rootfs rootfs / shared rec
     mount tmpfs tmpfs /mnt/secure private rec
-
-    # xen0n: it seems the nvram partition has moved in M...
+    
     symlink /dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name /dev/block/platform/mtk-msdc.0/by-name
-
+    
 on fs
     setprop ro.crypto.fuse_sdcard true
