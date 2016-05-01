@@ -5,22 +5,6 @@
 #include "datamngr_debug.h"
 #include "datamngr_event.h"
 
-///////////////////////////////////////////////
-#define EPDG_CID_OFFSET         (100)
-#define MAX_MID_NUM             (11)
-
-#define MID_INVALID             (-1)
-#define MID_IMS                 (0)
-#define MID_EIMS                (1)
-#define MID_FIXED               (2)
-
-#define ERAN_TYPE_MOBILE        (1)
-#define ERAN_TYPE_WIFI          (2)
-
-int add_cid2mid(int cid, int mid);
-int get_cid2mid(int cid);
-int get_mid2cid(int mid);
-///////////////////////////////////////////////
 #define DM_MAX_PDN_NUM (16)
 
 
@@ -60,7 +44,7 @@ dm_pdn_info_t * find_pdn_info_by_apn(char *apn);
 dm_pdn_info_t * find_pdn_info_by_index(unsigned index);
 dm_pdn_info_t * find_pdn_info_by_interface(int interface_id);
 int clear_pdn_info_by_cid(int cid);
-int clear_pdn_info_by_if(int interfaceId, int eran_type);
+int clear_pdn_info_by_if(int interfaceId);
 dm_pdn_info_t * find_pdn_info_by_cid(int cid);
 int add_pre_pdn_info(unsigned interface_id, char *apn);
 int retrieve_pre_pdn_info(unsigned interface_id, char *apn);

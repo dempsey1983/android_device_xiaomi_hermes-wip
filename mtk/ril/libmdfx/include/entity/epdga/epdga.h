@@ -4,10 +4,10 @@
 #include <stdint.h>
 
 #define IFNAMSIZ         16
-#define APN_NAME_LEN     20
+#define APN_NAME_LEN     100
 #define V4_ADDR_STR_LEN  16
 #define V6_ADDR_STR_LEN  40
-#define IF_NAME_LEN      20
+#define IF_NAME_LEN      100
 #define IMSI_STR_LEN     25
 #define MNC_STR_LEN      4
 #define MCC_STR_LEN      4
@@ -31,7 +31,7 @@ typedef enum ea_rsp_type_t {
   DETACH_CNF,
   HOL2W_CNF,
   DISCONNECT
-} ea_rsp_type_t;
+}  ea_rsp_type_t;
 
 typedef struct ea_sim_info_t {
   char imsi[IMSI_STR_LEN];

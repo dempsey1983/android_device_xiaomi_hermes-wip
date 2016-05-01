@@ -16,7 +16,6 @@
 #include "ctnr/map.h"
 #include "entity/datamngr/datamngr.h"
 #include "entity/mdmngr.h"
-#include "entity/nwmngr.h"
 #include "entity/imsmngr.h"
 #include <sys/types.h>  // NEED_TO_BE_NOTICED, temporarily methods to monitor memory usage
 
@@ -216,7 +215,6 @@ extern entity_ptr_t usr_entity_init (entity_ptr_t entity_ptr, const entity_init_
 extern entity_ptr_t usr_entity_exit (entity_ptr_t entity_ptr);
 
 extern mailbox_addr_ptr_t default_task_addr_ptr;
-extern task_ptr_t default_task_ptr;
 extern pool_t default_event_pool;
 extern thrd_lock_t default_event_pool_mutex;
 extern pool_t default_conn_pool;

@@ -205,10 +205,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/init.hermes.power.rc:root/init.hermes.power.rc \
     $(LOCAL_PATH)/rootdir/init.storage.rc:root/init.storage.rc \
     $(LOCAL_PATH)/rootdir/init.cm.rc:root/init.cm.rc \
-    $(LOCAL_PATH)/root/init.volte.rc:root/init.volte.rc \
-    $(LOCAL_PATH)/root/init.epdg.rc:root/init.epdg.rc \
-    $(LOCAL_PATH)/root/init.mal.rc:root/init.mal.rc \
-    $(LOCAL_PATH)/root/init.wfca.rc:root/init.wfca.rc \
+    $(LOCAL_PATH)/rootdir/init.volte.rc:root/init.volte.rc \
+    $(LOCAL_PATH)/rootdir/init.epdg.rc:root/init.epdg.rc \
+    $(LOCAL_PATH)/rootdir/init.mal.rc:root/init.mal.rc \
+    $(LOCAL_PATH)/rootdir/init.wfca.rc:root/init.wfca.rc \
    
 #These are the hardware-specific features
 PRODUCT_COPY_FILES += \

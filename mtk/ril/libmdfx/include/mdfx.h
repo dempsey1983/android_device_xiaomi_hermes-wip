@@ -14,7 +14,6 @@
 #include "ctnr/pool.h"
 #include "ctnr/queue.h"
 #include "ctnr/map.h"
-#include "tmr.h"
 #include "event.h"
 
 #include "io/mailbox.h"
@@ -97,11 +96,6 @@ extern map_ptr_t mdfx_map_exit (map_ptr_t map_ptr);
 #define mdfx_map_iterate(map_ptr, hook_fp, args ...)	(map_iterate((map_ptr), (hook_fp), ## args))
 #define mdfx_map_is_empty(map_ptr)	(map_is_empty((map_ptr)))
 
-// => Timer
-extern tmr_ptr_t mdfx_tmr_init (tmr_ptr_t tmr_ptr, const tmr_init_arg_ptr_t arg_ptr);
-extern tmr_ptr_t mdfx_tmr_exit (tmr_ptr_t tmr_ptr);
-extern int mdfx_tmr_arm (tmr_ptr_t tmr_ptr, tmr_time_ptr_t time_ptr, event_ptr_t event_ptr, context_id_t context_id);
-
 // => Event
 #define mdfx_event_init(event_ptr)	(event_init((event_ptr)))
 #define mdfx_event_exit(event_ptr)	(event_exit((event_ptr)))
@@ -150,6 +144,7 @@ extern event_ptr_t mdfx_task_recv_event (task_ptr_t task_ptr, task_rx_cond_t rx_
 #define mdfx_entity_set_priv(entity_ptr, priv_data)	(unlikely((entity_ptr) == NULL) ? NULL : ((entity_ptr)->idv.gen.priv = (priv_data)))
 #define mdfx_entity_get_priv(entity_ptr)	(unlikely((entity_ptr) == NULL) ? NULL : (entity_ptr)->idv.gen.priv)
 
+
 // => => MFI task
 extern task_ptr_t mdfx_mfi_task_init (task_ptr_t task_ptr, entity_id_t entity_id, task_id_t task_id);
 extern task_ptr_t mdfx_mfi_task_exit (task_ptr_t task_ptr);
@@ -195,5 +190,4 @@ extern int mdfx_conn_send (conn_ptr_t conn_ptr, event_ptr_t event_ptr);
 extern int mdfx_conn_recv (conn_ptr_t conn_ptr, event_ptr_t event_ptr);
 extern event_ptr_t mdfx_conn_send_recv (conn_ptr_t conn_ptr, event_ptr_t event_ptr);
 extern event_ptr_t mdfx_conn_send_cb (conn_ptr_t conn_ptr, event_ptr_t event_ptr, rx_cond_hdl_t rx_cond, void *rx_cond_arg, conn_hdl_t cb_hdl);
-#define mdfx_conn_get_id(conn_ptr)   (unlikely((conn_ptr) == NULL) ? CONTEXT_INVAL_ID : (conn_ptr)->->chnl.idv.uds.sock + SRV_MAX_ID)
 #endif

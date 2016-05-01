@@ -66,7 +66,6 @@ typedef enum {
     MAL_EGACT_CAUSE_DEACT_RA_INITIAL_ERROR = 2,
     MAL_EGACT_CAUSE_DEACT_NO_PCSCF = 3,
     MAL_EGACT_CAUSE_DEACT_RA_REFRESH_ERROR = 4,
-    MAL_EGACT_CAUSE_DEACT_VIA_RB = 100,
 } dm_disconn_cause_t;
 
 typedef enum {	// fail cause
@@ -191,13 +190,6 @@ typedef enum {
     MAL_PDP_FAIL_ERROR_UNSPECIFIED = 0xffff,  /* retry silently */
 } MAL_DataCallFailCause;
 
-
-typedef enum {
-    DM_MOBILE_3GPP = 1,
-    DM_WIFI = 2,
-    DM_MOBILE_3GPP2 = 3,
-} dm_rat_type_t;
-
 typedef struct {
 	char ext_module_name[STRING_SIZE];
 } dm_req_notification_t;
@@ -236,9 +228,8 @@ typedef struct {
     char username[STRING_SIZE];
     char passwd[STRING_SIZE];
     int authType;   // auth_type_t
-    int protocol;   // ip_type_t
-    int interfaceId; // RILD_Req, aka fake
-    int retryCount; // SDC retry cnt
+    int protocol;   // ip_type_t 
+    int interfaceId; //RILD_Req, aka fake
 
     int mIsValid;
     MAL_Qos qos;
@@ -246,7 +237,7 @@ typedef struct {
     int pcscf_discovery_flag;
     int signaling_flag;
     int isHandover;
-    int ran_type; // for VzW IMS on eHRPD
+    int ran_type; //for VzW IMS on eHRPD    
 }MAL_Setup_Data_Call_Struct;
 
 typedef struct {

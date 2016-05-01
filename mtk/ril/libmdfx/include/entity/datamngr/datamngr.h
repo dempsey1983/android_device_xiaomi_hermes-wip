@@ -63,7 +63,7 @@ extern int dm_get_ims_para_req(dm_req_ims_para_info_t *req, event_t *event);
 extern int dm_if_rat_cell_info_req(dm_if_rat_cell_info_req_t *req, event_t *event);
 extern int dm_handover_req(dm_ho_status_t *req, event_t *event);
 extern int dm_handover_resp(dm_resp_ho_t *resp, event_t *event);
-extern int dm_notify_epdg_deactivate(dm_req_deactivate_data_call_t *req, event_t *event);
+
 
 
 

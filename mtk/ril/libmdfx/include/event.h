@@ -103,11 +103,10 @@ extern size_t event_get_data_len (event_ptr_t event_ptr);    // NEED_TO_BE_NOTIC
 extern size_t event_set_data_size (event_ptr_t event_ptr, size_t data_size);    // NEED_TO_BE_NOTICED, a dangerous operation, be careful
 extern size_t event_get_data_size (event_ptr_t event_ptr);    // NEED_TO_BE_NOTICED, a dangerous operation, be careful
 // => => Event address
-extern event_addr_ptr_t event_set_addr (event_ptr_t event_ptr, event_addr_ptr_t addr_ptr);
+extern const event_addr_ptr_t event_set_addr (event_ptr_t event_ptr, event_addr_ptr_t addr_ptr);
 extern int event_reset_addr (event_ptr_t event_ptr);
-extern event_addr_ptr_t event_get_first_addr (event_ptr_t event_ptr);
-extern event_addr_ptr_t event_get_last_addr (event_ptr_t event_ptr);
-extern int event_reset_last_addr (event_ptr_t event_ptr);
+extern const event_addr_ptr_t event_get_first_addr (event_ptr_t event_ptr);
+extern const event_addr_ptr_t event_get_last_addr (event_ptr_t event_ptr);
 extern int event_iterate_addr_track (event_ptr_t event_ptr, event_hook_fp_t hook_fp, ...);
 // => => => Address operations
 extern event_seq_t event_addr_set_seq (event_addr_ptr_t addr_ptr, event_seq_t seq);
@@ -116,15 +115,15 @@ extern event_seq_t event_addr_get_seq (event_addr_ptr_t addr_ptr);
 #ifdef MAL_SUPPORT
 // => => MAL-specific
 // => => => Address operations, NEEDTO_BE_NOTICED, certain functions will be implemented on demand
-extern mailbox_addr_ptr_t event_addr_set_src_addr (event_addr_ptr_t addr_ptr, const mailbox_addr_ptr_t src_addr_ptr);
-extern mailbox_addr_ptr_t event_addr_get_src_addr (event_addr_ptr_t addr_ptr);
-extern mailbox_addr_ptr_t event_addr_set_dst_addr (event_addr_ptr_t addr_ptr, const mailbox_addr_ptr_t dst_addr_ptr);
-extern mailbox_addr_ptr_t event_addr_get_dst_addr (event_addr_ptr_t addr_ptr);
+extern const mailbox_addr_ptr_t event_addr_set_src_addr (event_addr_ptr_t addr_ptr, const mailbox_addr_ptr_t src_addr_ptr);
+extern const mailbox_addr_ptr_t event_addr_get_src_addr (event_addr_ptr_t addr_ptr);
+extern const mailbox_addr_ptr_t event_addr_set_dst_addr (event_addr_ptr_t addr_ptr, const mailbox_addr_ptr_t dst_addr_ptr);
+extern const mailbox_addr_ptr_t event_addr_get_dst_addr (event_addr_ptr_t addr_ptr);
 extern event_addr_ext_type_t event_addr_get_ext_type (event_addr_ptr_t addr_ptr);
-extern chnl_ptr_t event_addr_set_ext_chnl (event_addr_ptr_t addr_ptr, const chnl_ptr_t ext_chnl_ptr);
-extern chnl_ptr_t event_addr_get_ext_chnl (event_addr_ptr_t addr_ptr);
-extern mailbox_ptr_t event_addr_set_ext_mailbox (event_addr_ptr_t addr_ptr, const mailbox_ptr_t ext_mailbox_ptr);
-extern mailbox_ptr_t event_addr_get_ext_mailbox (event_addr_ptr_t addr_ptr);
+extern const chnl_ptr_t event_addr_set_ext_chnl (event_addr_ptr_t addr_ptr, const chnl_ptr_t ext_chnl_ptr);
+extern const chnl_ptr_t event_addr_get_ext_chnl (event_addr_ptr_t addr_ptr);
+extern const mailbox_ptr_t event_addr_set_ext_mailbox (event_addr_ptr_t addr_ptr, const mailbox_ptr_t ext_mailbox_ptr);
+extern const mailbox_ptr_t event_addr_get_ext_mailbox (event_addr_ptr_t addr_ptr);
 extern event_seq_t event_addr_set_ext_seq (event_addr_ptr_t addr_ptr, event_seq_t seq);
 extern event_seq_t event_addr_get_ext_seq (event_addr_ptr_t addr_ptr);
 extern event_addr_ptr_t event_addr_cpy (event_addr_ptr_t dst_addr_ptr, const event_addr_ptr_t src_addr_ptr);

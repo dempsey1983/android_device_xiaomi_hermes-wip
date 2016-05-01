@@ -131,5 +131,12 @@ typedef struct _sim_stk_notify_ {
     unsigned int efid[256];// hex
 } sim_stk_notify_t;
 
+typedef struct _sim_state_notify_reg_req_ {
+	int is_reg;// 0 : de-reg, 1 : reg
+	int is_external;// 0 : internal, 1 : external
+	int reg_task_id;
+	int reg_event_id;
+} sim_state_notify_reg_req_t;
+
 #endif
 

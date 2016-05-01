@@ -182,11 +182,18 @@ typedef struct _sim_stk_notify_ {
     unsigned int efid[256];// hex
 } sim_stk_notify_t;
 
+typedef struct _sim_state_notify_reg_req_ {
+	int is_reg;// 0 : de-reg, 1 : reg
+	int is_external;// 0 : internal, 1 : external
+	int reg_task_id;
+	int reg_event_id;
+} sim_state_notify_reg_req_t;
+
 
 typedef int (*simmngr_sim_insert_state_notify_fn)(sim_data_notify_t *sim_state, void *priv);
 typedef int (*simmngr_sim_usim_detect_notify_fn)(sim_data_notify_t *usim_detect, void *priv);
 typedef int (*simmngr_sim_isim_ch_notify_fn)(sim_data_notify_t *isim_ch, void *priv);
-typedef int (*simmngr_sim_insert_check_notify_fn)(sim_data_notify_t *insert_check, void *priv);
+typedef int (*simmngr_sim_insert_check_notify_fn)(sim_insert_check_t *insert_check, void *priv);
 typedef int (*simmngr_sim_stk_refresh_notify_fn)(sim_stk_notify_t *stk_notify, void *priv);
 typedef struct _mal_simmngr_notify_function_ {
     simmngr_sim_insert_state_notify_fn          sim_insert_state;

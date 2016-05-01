@@ -59,7 +59,6 @@ typedef enum entity_id
     ENTITY_IMSMNGR,
     ENTITY_RDS,
     ENTITY_EPDGA,
-    ENTITY_NWMNGR,
     
     ENTITY_MAX_ID   // for control
 }entity_id_t;
@@ -81,7 +80,6 @@ typedef enum task_id
     TASK_MDMNGR2,
     TASK_MDMNGR3,
     TASK_MDMNGR4,
-    TASK_MDMNGR5,
 
     TASK_RILPROXY_START = 200,
     TASK_RILPROXY,
@@ -110,8 +108,6 @@ typedef enum task_id
     TASK_EPDGA_SIM,
     TASK_EPDGA_QUERY,
 
-    TASK_NWMNGR_START   = 800,
-    TASK_NWMNGR,
 
     TASK_MAX_ID     // for control
 }task_id_t;
@@ -214,6 +210,8 @@ typedef enum event_id
     EVENT_SIMMNGR_IMS_ENABLE_REQ,
     EVENT_SIMMNGR_IMS_DISABLE_REQ,
     EVENT_SIMMNGR_MNC_LEN_REQ,
+    EVENT_SIMMNGR_SIM_STATE_REG_REQ,
+    EVENT_SIMMNGR_SIM_STATE_REG_RESP,
 
     // => Data Manager event 
     EVENT_DATAMNGR_START = 300,
@@ -298,11 +296,6 @@ typedef enum event_id
     EVENT_RU_WS_WIFI_STATUS_IND,        /* 4: WPA Supplicant WiFi status indication */    
     EVENT_RU_DM_3GPP_STATUS_IND,        /* 5: Data Manager(?) 3GPP status indication */
     EVENT_RU_RB_WSL_CFG_IND,            /* 6: WPA Supplicant Lisener config */
-    EVENT_MFI_RU_SET_CALLSTATUS_REQ,    /* 7: IMS in call status update request */
-    EVENT_RU_RB_WIFI_RVOUT_IND,         /* 8: Wifi roveout indication */
-    EVENT_MFI_RU_SET_MDSTATUS_REQ,      /* 9: FWK set MD status */
-    EVENT_RU_NM_CGREG_REQ,              /* 10: CGREG request to NM */
-    EVENT_RU_NM_CGREG_CNF,              /* 11: CGREG confirm from NM */
 
     EVENT_RDS_RB = EVENT_RDS_START+30,   
     /* RB IF */
@@ -325,17 +318,14 @@ typedef enum event_id
     EVENT_RB_DM_HO_REQ,                 /* 47: H.O request rds_ho_status_t*/ 
     EVENT_RB_HO2RAN_REQ,                /* 48: RB H.O 2 RAN request */
     EVENT_RB_EA_HOLIST_IND,             /* 49: New HO apn info update IND from EA */
-    EVENT_RB_EA_HO_REQ,                 /* 50: */
-    EVENT_RB_DM_EPDG_PDN_DETACT_REQ,    /* 51: */
-    EVENT_RB_SYSHO_TO_IND,              /* 52: H.O. timeout indication */
-    EVENT_MFI_RB_WIFI_RVOUT_IND,        /* 53: wifi rove out indication */
-    EVENT_MFI_RB_WIFIPDN_ACT_IND,       /* 54: wifi PDN State indication */
+    EVENT_UT_RB_DUMPDNI4,               /* 50: */
+    EVENT_UT_RB_NWDDCIND,               /* 51: */
+    EVENT_RB_EA_HO_REQ,                 /* 52: */    
 
     EVENT_RDS_RRA = EVENT_RDS_START+60,   
     /* RRA IF */
     EVENT_RRA_RB_HO_RETRY_IND,          /* 61: */
     EVENT_RRA_SYS_RETRY_TO_IND,         /* 62: */
-    EVENT_RRA_SYSTATE_UPADTE_IND,       /* 63: */
 
     EVENT_RDS_EA = EVENT_RDS_START+70,
     /* for RB & EA */   
@@ -351,7 +341,7 @@ typedef enum event_id
     /* To UT IF */
     EVENT_RU_RB_UT_RPL_UPDATE_REQ,      /* 81: */
     /* To outside MAL */
-    EVENT_MFI_RB_HO_STATUS_IND,         /* 82: handover status indication */
+    EVENT_MFI_RB_HO_STATUS_IND,         /* 82: handover status indication */  
     /* To RDS Common */
     EVENT_MAL_RDS_REG_REQ,              /* 83: register task */
     EVENT_MAL_RDS_DEREG_REQ,            /* 84: deregister task */
@@ -360,9 +350,7 @@ typedef enum event_id
     EVENT_RDS_INTERNAL_ERR_RSP,         /* 87: for error response */
     /* Timer to RDS */
     EVENT_RU_TM_WSL_TIMER_IND,          /* 88: WPA Supplicant timer indication */
-    EVENT_UT_RU_CONIF_REQ,              /* 89: UT purpose */
-    EVENT_UT_RB_DUMPDNI4,               /* 90: */
-    EVENT_UT_RB_NWDDCIND,               /* 91: */
+    EVENT_UT_RU_CONIF_REQ,              /* 89: UT purpose */       
 
     EVENT_RDS_RB_SKIP1IMS_UT,
     EVENT_RDS_RB_MOBILE_DDC_UT,
@@ -379,14 +367,6 @@ typedef enum event_id
 
     EVENT_EPDGA_QUERY_AP_MAC_REQ,
     EVENT_EPDGA_QUERY_AP_MAC_RSP,
-
-
-    // => Network Manager event
-    EVENT_NWMNGR_START = 800,
-    
-    EVENT_NWMNGR_SET_PS_REG_STATE_MODE,
-    EVENT_NWMNGR_GET_PS_REG_STATE,
-    EVENT_NWMNGR_NOTIFY_PS_REG_STATE,
     
     EVENT_MAX_ID        // for control
 }event_id_t;

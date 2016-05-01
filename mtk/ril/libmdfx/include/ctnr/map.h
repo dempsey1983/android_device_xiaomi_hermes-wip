@@ -1,5 +1,5 @@
 /*
-    Here is an interface of the map to hide implementation. 
+    Here is an interface of the map to hide the general tool libraries. 
     A map provides the association between the keys and values. 
     Using a pool is a default policy for managing memory allocation. 
     The insert function can only insert a new node without a collision. 
@@ -19,7 +19,7 @@
 
 // Compiler flags, NEED_TO_BE NOTICED, set by compiler
 // => Hash map
-// N/A
+//  N/A
 
 // Type definitions
 typedef struct map map_t;
@@ -31,14 +31,14 @@ typedef struct map_init_arg map_init_arg_t;
 typedef struct map_init_arg* map_init_arg_ptr_t;
 typedef void (*map_hook_fp_t) (const void *key, size_t key_len, void *val, size_t val_len, va_list vl);
 // => Hash map
-typedef int32_t (*hash_map_hash_fp_t) (map_ptr_t map_ptr, const void *key, size_t key_len);    // NEED_TO_BE_NOTICED, should NOT assume 32-bit
+typedef uint32_t (*hash_map_hash_fp_t) (map_ptr_t map_ptr, const void *key, size_t key_len);    // NEED_TO_BE_NOTICED, should not assume 32-bit
 
 // Macros
 #define MAP_NODE_KEY_INIT_SIZE    (sizeof(int))    // NEED_TO_BE_NOTICED, we assume that an integer is the most common key to be used
 #define MAP_NODE_VAL_INIT_SIZE    (sizeof(int))    // NEED_TO_BE_NOTICED, we assume that an integer is the most common data to be stored
 // => Hash map
 #define HASH_MAP_INVAL_INDEX    CHAIN_INVAL_IDX
-#define HASH_MAP_DEFAULT_TBL_SIZE_PWR    (8)    // NEED_TO_BE_NOTICED, more than 31 is useless due to the 32-bit assumption
+#define HASH_MAP_INIT_SIZE_PWR    (6)
 
 // Functions
 #define map_init(map_ptr, arg_ptr)    (unlikely((map_ptr) == NULL || (map_ptr)->init_fp == NULL) ? NULL : (map_ptr)->init_fp((map_ptr), (arg_ptr)))
@@ -88,8 +88,7 @@ struct map_init_arg
         // Hash map
         struct
         {
-            hash_map_hash_fp_t hash_fp;
-            size_t tbl_size_pwr;
+            hash_map_hash_fp_t func;
         }hash;
     }idv;
 };
@@ -104,12 +103,12 @@ struct map_node
     // Individual variables which must be private
     union
     {
-        // Hash map
+        // Chained map
         struct
         {
             struct map_node *link;
         }hash;
-    }idv;
+    }idv;    
 };
 
 // => Abstract Data Type
@@ -132,7 +131,7 @@ struct map
     {
         struct
         {
-            hash_map_hash_fp_t hash_fp;
+            hash_map_hash_fp_t func;
             chain_t tbl;
             size_t tbl_size_pwr;
         }hash;

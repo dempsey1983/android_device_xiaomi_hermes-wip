@@ -40,7 +40,6 @@ enum ATURC_TYPE_e {
     ATURC_CREG,
     ATURC_CGREG,
     ATURC_CEREG,
-    ATURC_CIREPI,
     ATURC_STKPCI,
 };
 

@@ -17,10 +17,4 @@ int mal_ril_connect (void *o);
 
 int mal_ril_disconnect (void *o);
 
-int mal_get_ps_reg_state (char *buf, unsigned int len);
-
-int mal_get_ps_reg_state_ex (int type, char *buf, unsigned int buf_len);
-
-int mal_set_ps_format(int long_format);
-
 #endif /* __MAL_INTERFACE_H__ */
