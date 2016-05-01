@@ -24,6 +24,7 @@
 #include <sys/ioctl.h>
 #include <sys/mman.h>
 #include <sys/types.h>
+#include <string.h>
 
 #include <ion/ion.h>
 #include <linux/mtk_ion.h>

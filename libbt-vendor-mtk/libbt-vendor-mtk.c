@@ -1,21 +1,6 @@
-/*
- * Bluetooth Vendor Library for MTK's libbluetoothdrv blob
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 #define LOG_TAG "libbt_vendor_mtk"
 
+#include <stdlib.h>
 #include <stdio.h>
 #include <dlfcn.h>
 #include <utils/Log.h>
@@ -23,9 +8,8 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <bt_vendor_lib.h>
-/* #include <bt_hci_lib.h> */
 #include <bt_hci_bdroid.h>
-/* #include <utils.h> */
+#include <hardware/bluetooth.h>
 
 /**
  * TODO: check/fix this value. does this make sense for MTK? It is taken from TI
@@ -67,7 +51,7 @@ int mtk_init(const bt_vendor_callbacks_t* p_cb, unsigned char *local_bdaddr) {
   if (p_cb == NULL)
     {
       ALOGE("init failed with no user callbacks!");
-      return -1;
+      return BT_HC_STATUS_FAIL;
     }
 
   bt_vendor_cbacks = (bt_vendor_callbacks_t *) p_cb;
@@ -75,11 +59,7 @@ int mtk_init(const bt_vendor_callbacks_t* p_cb, unsigned char *local_bdaddr) {
   dlerror();
 
   mtklib_handle = dlopen("libbluetoothdrv.so", RTLD_LAZY);
-  if (! mtklib_handle) {
-    ALOGE("Failed to open libbluetoothdrv library");
-    return (int)mtklib_handle;
-  }
-
+ 
   mtk_bt_enable = dlsym(mtklib_handle, "mtk_bt_enable");
   mtk_bt_disable = dlsym(mtklib_handle, "mtk_bt_disable");
 
